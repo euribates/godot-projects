@@ -1,0 +1,69 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Tanks/Tank.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Tanks/Enemy.gd" type="Script" id=2]
+[ext_resource path="res://onlyObjects_rotated.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 19.8181, 18.3936 )
+
+[sub_resource type="CircleShape2D" id=2]
+
+custom_solver_bias = 0.0
+radius = 140.0
+
+[node name="Enemy" index="0" instance=ExtResource( 1 )]
+
+script = ExtResource( 2 )
+turret_speed = 3.0
+detect_radius = 150.0
+
+[node name="Body" parent="." index="0"]
+
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 76, 93.5, 40, 37.75 )
+_sections_unfolded = [ "Region" ]
+
+[node name="Turret" parent="." index="1"]
+
+texture = ExtResource( 3 )
+offset = Vector2( 12, 0 )
+region_enabled = true
+region_rect = Rect2( 316, 21, 30, 12 )
+_sections_unfolded = [ "Offset", "Region" ]
+
+[node name="Muzzle" parent="Turret" index="0"]
+
+position = Vector2( 36, 0 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="CollisionShape2D" parent="." index="2"]
+
+shape = SubResource( 1 )
+
+[node name="Detector" type="Area2D" parent="." index="4"]
+
+modulate = Color( 0.476562, 0.191742, 0.191742, 1 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Collision", "Transform", "Visibility", "Z Index" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detector" index="0"]
+
+modulate = Color( 0.229567, 0.71875, 0.18811, 1 )
+shape = SubResource( 2 )
+_sections_unfolded = [ "Visibility" ]
+
+[connection signal="body_entered" from="Detector" to="." method="_on_Detector_body_entered"]
+
+[connection signal="body_exited" from="Detector" to="." method="_on_Detector_body_exited"]
+
+

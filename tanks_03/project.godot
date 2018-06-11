@@ -10,9 +10,8 @@ config_version=3
 
 [application]
 
-config/name="tanks_02"
-run/main_scene="res://Tanks/Player.tscn"
-config/use_custom_user_dir=true
+config/name="tanks_03"
+run/main_scene="res://Maps/Map.tscn"
 config/icon="res://icon.png"
 
 [display]
