@@ -3,18 +3,13 @@ extends Sprite
 # class member variables go here, for example:
 # var a = 2
 # var b = "textvar"
-var velocidad = Vector2(1, 0.5)
+export (Vector2) var velocidad
 
 func _ready():
-	# Called every time the node is added to the scene.
-	# Initialization here
-	pass
+    velocidad = Vector2(1, -2).normalized()
 
 func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
     position += velocidad * delta * 200
-    if position.x > 800 or position.x < 0: 
-        velocidad.x = - velocidad.x
-    if position.y > 600 or position.y < 0: 
-        velocidad.y = - velocidad.y
+
+func vertical_bounce(body):
+    velocidad.y = - velocidad.y
