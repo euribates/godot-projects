@@ -1,17 +1,20 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://ball.png" type="Texture" id=1]
 [ext_resource path="res://Sprite.gd" type="Script" id=2]
 
-[node name="Root" type="Area2D" index="0"]
+[sub_resource type="RectangleShape2D" id=2]
 
-input_pickable = true
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
-audio_bus_override = false
-audio_bus_name = "Master"
+custom_solver_bias = 0.0
+extents = Vector2( 5.71893, 5.65118 )
+
+[sub_resource type="RectangleShape2D" id=3]
+
+custom_solver_bias = 0.0
+extents = Vector2( 480.688, 39.612 )
+
+[node name="Root" type="Node2D" index="0"]
+
 _sections_unfolded = [ "Transform" ]
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
@@ -19,6 +22,54 @@ _sections_unfolded = [ "Transform" ]
 position = Vector2( 400, 300 )
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
-_sections_unfolded = [ "Material", "Pause", "Transform", "Visibility" ]
+_sections_unfolded = [ "Material", "Offset", "Pause", "Region", "Transform", "Visibility" ]
+velocidad = null
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="Sprite" index="0"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+collision/safe_margin = 0.08
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/KinematicBody2D" index="0"]
+
+shape = SubResource( 2 )
+
+[node name="TopWall" type="Area2D" parent="." index="1"]
+
+position = Vector2( 435.164, -39.0532 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopWall" index="0"]
+
+position = Vector2( -11.0804, -2.21606 )
+shape = SubResource( 3 )
+
+[node name="BottonWall" type="Area2D" parent="." index="2"]
+
+position = Vector2( 435.164, -39.0532 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottonWall" index="0"]
+
+position = Vector2( -36.7051, 683.624 )
+shape = SubResource( 3 )
+
+[connection signal="body_entered" from="TopWall" to="Sprite" method="vertical_bounce"]
+
+[connection signal="body_entered" from="BottonWall" to="Sprite" method="vertical_bounce"]
 
 
