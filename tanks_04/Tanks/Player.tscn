@@ -1,0 +1,73 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Tanks/Tank.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Tanks/Player.gd" type="Script" id=2]
+[ext_resource path="res://Bullets/PlayerBullet.tscn" type="PackedScene" id=3]
+[ext_resource path="res://onlyObjects_rotated.png" type="Texture" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 20.4192 )
+
+[node name="Player" index="0" instance=ExtResource( 1 )]
+
+script = ExtResource( 2 )
+Bullet = ExtResource( 3 )
+speed = 200
+rotation_speed = 0.5
+gun_cooldown_time = 0.4
+
+[node name="Body" parent="." index="0"]
+
+texture = ExtResource( 4 )
+region_enabled = true
+region_rect = Rect2( 204, 133.007, 40, 41.993 )
+_sections_unfolded = [ "Region" ]
+
+[node name="Turret" parent="." index="1"]
+
+texture = ExtResource( 4 )
+offset = Vector2( 12, 0 )
+region_enabled = true
+region_rect = Rect2( 210, 21, 30, 12 )
+_sections_unfolded = [ "Offset", "Region", "Transform" ]
+
+[node name="Muzzle" parent="Turret" index="0"]
+
+position = Vector2( 34, 0 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="CollisionShape2D" parent="." index="2"]
+
+position = Vector2( 0.0391237, 0 )
+scale = Vector2( 1.8855, 1 )
+shape = SubResource( 1 )
+
+[node name="Camera2D" type="Camera2D" parent="." index="4"]
+
+anchor_mode = 1
+rotating = false
+current = true
+zoom = Vector2( 1, 1 )
+limit_left = 0
+limit_top = 0
+limit_right = 10000000
+limit_bottom = 10000000
+limit_smoothed = false
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+smoothing_enabled = false
+smoothing_speed = 5.0
+offset_v = 0.0
+offset_h = 0.0
+drag_margin_left = 0.2
+drag_margin_top = 0.2
+drag_margin_right = 0.2
+drag_margin_bottom = 0.2
+editor_draw_screen = true
+editor_draw_limits = false
+editor_draw_drag_margin = false
+_sections_unfolded = [ "Limit" ]
+
+
