@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Ship.gd" type="Script" id=1]
+[ext_resource path="res://nave.png" type="Texture" id=2]
+
+[node name="Ship" type="KinematicBody2D" index="0"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+collision/safe_margin = 0.08
+script = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Sprite" type="Sprite" parent="." index="0"]
+
+texture = ExtResource( 2 )
+hframes = 2
+_sections_unfolded = [ "Animation", "Transform" ]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="1"]
+
+build_mode = 0
+polygon = PoolVector2Array( -12.6622, -36.1972, -28.2678, -18.1532, -29.7308, 15.4964, -11.6868, 35.491, 38.5437, 4.7675, 39.0314, -4.49832 )
+
+[node name="Sight" type="Position2D" parent="." index="2"]
+
+position = Vector2( 48, 0 )
+_sections_unfolded = [ "Transform" ]
+
+
